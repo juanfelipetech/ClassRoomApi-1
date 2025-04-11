@@ -1,10 +1,12 @@
 package com.example.ClassRoomApi.services;
 
+import com.example.ClassRoomApi.helpers.MensajeAPI;
 import com.example.ClassRoomApi.models.Teacher;
 import com.example.ClassRoomApi.repositories.ITeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,7 +38,7 @@ public class TeacherService {
                 return this.repository.save(searchedTeacher.get());
             }else{
                 //No estaba el muñeco
-                throw new Exception("El usuario a modificar no se encuetra en BD");
+                throw new Exception(MensajeAPI.TEACHER_NOT_FOUND.getText());
             }
         }catch (Exception mistake){
             throw new Exception(mistake.getMessage());
@@ -44,11 +46,42 @@ public class TeacherService {
     }
 
     //BUSCAR POR ID
-
+    public Teacher searchTeacherById(Integer id)throws Exception{
+        try{
+            Optional<Teacher> searchedTeacher = this.repository.findById(id);
+            if (searchedTeacher.isPresent()){
+                //Retorno el docente que busco
+                return searchedTeacher.get();
+            }else{
+                //Mensaje que no está
+                throw new Exception(MensajeAPI.TEACHER_NOT_FOUND.getText());
+            }
+        }catch (Exception mistake){
+            throw new Exception(mistake.getMessage());
+        }
+    }
     //BUSCAR TODOS
-
+    public List<Teacher> searchAllTeacher()throws Exception{
+        try{
+            return this.repository.findAll();
+        }catch(Exception mistake){
+            throw new Exception(mistake.getMessage());
+        }
+    }
     //ELIMINAR
-
+    public boolean eliminateTeacher(Integer id)throws Exception{
+        try{
+          Optional<Teacher> searchedTeacher = this.repository.findById(id);
+          if (searchedTeacher.isPresent()){
+              this.repository.deleteById(id);
+              return true;
+          }else{
+              throw new Exception(MensajeAPI.TEACHER_NOT_FOUND.getText());
+          }
+        }catch (Exception mistake){
+            throw new Exception(mistake.getMessage());
+        }
+    }
 
 
 }
