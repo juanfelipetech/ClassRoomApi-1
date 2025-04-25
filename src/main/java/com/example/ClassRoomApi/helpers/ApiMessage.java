@@ -1,12 +1,12 @@
 package com.example.ClassRoomApi.helpers;
 
-public enum MensajeAPI {
+public enum ApiMessage {
 
     TEACHER_NOT_FOUND("El docente que buscas no se encuentra en BD");
 
     private String text;
 
-    MensajeAPI(String text) {
+    ApiMessage(String text) {
         this.text = text;
     }
 

@@ -1,6 +1,6 @@
 package com.example.ClassRoomApi.services;
 
-import com.example.ClassRoomApi.helpers.MensajeAPI;
+import com.example.ClassRoomApi.helpers.ApiMessage;
 import com.example.ClassRoomApi.models.Teacher;
 import com.example.ClassRoomApi.repositories.ITeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class TeacherService {
                 return this.repository.save(searchedTeacher.get());
             }else{
                 //No estaba el muñeco
-                throw new Exception(MensajeAPI.TEACHER_NOT_FOUND.getText());
+                throw new Exception(ApiMessage.TEACHER_NOT_FOUND.getText());
             }
         }catch (Exception mistake){
             throw new Exception(mistake.getMessage());
@@ -54,7 +54,7 @@ public class TeacherService {
                 return searchedTeacher.get();
             }else{
                 //Mensaje que no está
-                throw new Exception(MensajeAPI.TEACHER_NOT_FOUND.getText());
+                throw new Exception(ApiMessage.TEACHER_NOT_FOUND.getText());
             }
         }catch (Exception mistake){
             throw new Exception(mistake.getMessage());
@@ -69,14 +69,14 @@ public class TeacherService {
         }
     }
     //ELIMINAR
-    public boolean eliminateTeacher(Integer id)throws Exception{
+    public boolean deleteTeacher(Integer id)throws Exception{
         try{
           Optional<Teacher> searchedTeacher = this.repository.findById(id);
           if (searchedTeacher.isPresent()){
               this.repository.deleteById(id);
               return true;
           }else{
-              throw new Exception(MensajeAPI.TEACHER_NOT_FOUND.getText());
+              throw new Exception(ApiMessage.TEACHER_NOT_FOUND.getText());
           }
         }catch (Exception mistake){
             throw new Exception(mistake.getMessage());
