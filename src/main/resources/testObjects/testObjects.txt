@@ -1,0 +1,11 @@
+/users
+{
+   "name": "Juan Felipe Moreno Cataño"
+   "email": "juanfelipehbl@gmail.com"
+   "password": "admin123*"
+   "phoneNumber": "3044542900"
+   "userType": "Docente"
+}
+
+
+/teacher
